@@ -9,13 +9,13 @@ module.exports = function (eleventyConfig) {
     type: "atom",
     outputPath: "/feed.xml",
     collection: {
-      name: "posts",
+      name: "feed",
       limit: 20,
     },
     metadata: {
       language: "en",
-      title: "Garrek.org",
-      subtitle: "Recepticle for ongoing brain dumps by Garrek Stemo",
+      title: "Garrek Stemo",
+      subtitle: "Experimental physicist in Japan. Writing on science, economics, technology, and the good life.",
       base: "https://garrek.org/",
       author: {
         name: "Garrek Stemo",
@@ -28,6 +28,16 @@ module.exports = function (eleventyConfig) {
     return collectionApi
       .getFilteredByGlob("src/posts/*.md")
       .sort((a, b) => b.date - a.date);
+  });
+
+  // Feed collection — chronological (oldest first).
+  // The RSS plugin does `collection | reverse | head(limit)` internally, so an
+  // oldest-first input yields a newest-first feed and the limit keeps the
+  // NEWEST 20 posts (a newest-first input would keep the oldest 20).
+  eleventyConfig.addCollection("feed", function (collectionApi) {
+    return collectionApi
+      .getFilteredByGlob("src/posts/*.md")
+      .sort((a, b) => a.date - b.date);
   });
 
   // Posts grouped by year — for the writing archive page
