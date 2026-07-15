@@ -13,8 +13,6 @@ Hand-coded personal site with original design. Respect existing design decisions
 
 ### Build & deploy
 
-- `npm start` — Eleventy dev server with live reload
-- `npm run build` — build to `_site/`
 - `npx wrangler deploy` — deploy `_site/` to Cloudflare Workers (config `wrangler.toml`, `[assets] directory ./_site`). `wrangler` is fetched on the fly via `npx`, not a project dependency.
 
 ## Design
@@ -34,13 +32,7 @@ CSS Grid with subgrid; 640px breakpoint.
 
 ## Site Structure
 
-Entry: `eleventy.config.js` (collections, filters, passthrough). Browse `src/` — notable bits:
-
-- `src/_includes/` — `head.liquid`, `navigation.liquid`, `footer.liquid` (copyright + `/subscribe/` + RSS + JSON Feed), and `layouts/` (`default.liquid`, `post.liquid`, `gallery.liquid`).
-- `src/posts/` — Markdown posts `YYYY-MM-DD-title.md`; `posts.11tydata.js` sets the post layout and computes permalinks.
-- `src/feed-json.njk` — JSON Feed template.
-- `src/subscribe.html` — Buttondown email form, `permalink: /subscribe/` (linked from footer "Newsletter" and about.html).
-- Page files: `index.liquid` (paginated home), `writing.liquid`, `photography.liquid`, `about.html`, `research.html`, `code.html`, `sports.html`, `404.html`.
+Entry: `eleventy.config.js` (collections, filters, passthrough); browse `src/` for the rest. Posts live in `src/posts/`, named `YYYY-MM-DD-title.md`.
 
 ## Posts
 
